@@ -26,7 +26,12 @@ The training paramers were:
 The forward model was trained for 30 epochs, resulting in a ppl of 2.48.
 The backward model was trained for 31 epochs, resulting in a ppl of 2.51.
 
-Downloads: [forward model](https://schweter.eu/cloud/flair-lms/lm-bg-small-forward-v0.1.pt) - [backward model](https://schweter.eu/cloud/flair-lms/lm-bg-small-backward-v0.1.pt).
+Downloads:
+
+```bash
+wget https://schweter.eu/cloud/flair-lms/lm-bg-small-forward-v0.1.pt
+wget https://schweter.eu/cloud/flair-lms/lm-bg-small-backward-v0.1.pt
+```
 
 # Slovenian
 
@@ -44,7 +49,12 @@ size of 1.8G (314,973,528 token).
 The forward model was trained for 8 epochs, resulting in a ppl of 3.28.
 The backward model was trained for 4 epochs, resulting in a ppl of 3.34.
 
-Downloads: [forward model](https://schweter.eu/cloud/flair-lms/lm-sl-large-forward-v0.1.pt) - [backward model](https://schweter.eu/cloud/flair-lms/lm-sl-large-backward-v0.1.pt).
+Downloads:
+
+```bash
+wget https://schweter.eu/cloud/flair-lms/lm-sl-large-forward-v0.1.pt
+wget https://schweter.eu/cloud/flair-lms/lm-sl-large-backward-v0.1.pt
+```
 
 # Training tips
 
