@@ -39,6 +39,8 @@ The Slovenian language model was trained on various sources like Europarl,
 Wikipedia and OpenSubtitles2018. The training corpus is large and has a total
 size of 1.8G (314,973,528 token).
 
+The training paramers were:
+
 | Parameter         | Value
 | ----------------- | -----
 | `hidden_size`     | 2048
@@ -54,6 +56,30 @@ Downloads:
 ```bash
 wget https://schweter.eu/cloud/flair-lms/lm-sl-large-forward-v0.1.pt
 wget https://schweter.eu/cloud/flair-lms/lm-sl-large-backward-v0.1.pt
+```
+
+# Dutch
+
+The Dutch language model was trained on various sources like Europarl,
+Wikipedia and OpenSubtitles2018. The training curpus is large and has a
+total size of 4.9G (897,298,291 token).
+
+The training paramers were:
+
+| Parameter         | Value
+| ----------------- | -----
+| `hidden_size`     | 2048
+| `nlayers`         | 1
+| `sequence_length` | 250
+| `mini_batch_size` | 200 (different to Bulgarian and Slovenian)
+
+The forward model was trained for 3 epochs, resulting in a ppl of 2.78.
+The backward model is currently training...
+
+Downloads:
+
+```bash
+wget https://schweter.eu/cloud/flair-lms/lm-nl-large-forward-v0.1.pt
 ```
 
 # Training tips
