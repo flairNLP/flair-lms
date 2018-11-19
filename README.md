@@ -73,13 +73,14 @@ The training paramers were:
 | `sequence_length` | 250
 | `mini_batch_size` | 200 (different to Bulgarian and Slovenian)
 
-The forward model was trained for 3 epochs, resulting in a ppl of 2.78.
-The backward model is currently training...
+The forward model was trained for 2 epochs, resulting in a ppl of 2.78.
+The backward model was trained for 2 epochs, resulting in a ppl of 2.77.
 
 Downloads:
 
 ```bash
 wget https://schweter.eu/cloud/flair-lms/lm-nl-large-forward-v0.1.pt
+wget https://schweter.eu/cloud/flair-lms/lm-nl-large-backward-v0.1.pt
 ```
 
 # Training tips
