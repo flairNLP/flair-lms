@@ -109,6 +109,30 @@ wget https://schweter.eu/cloud/flair-lms/lm-sv-large-forward-v0.1.pt
 wget https://schweter.eu/cloud/flair-lms/lm-sv-large-backward-v0.1.pt
 ```
 
+# Czech
+
+The Czech language model was trained on various sources like Europarl,
+Wikipedia and OpenSubtitles2018. The training curpus is large and has a
+total size of 4.7G (778,186,641 token).
+
+The training paramers were:
+
+| Parameter         | Value
+| ----------------- | -----
+| `hidden_size`     | 2048
+| `nlayers`         | 1
+| `sequence_length` | 250
+| `mini_batch_size` | 200 (like Swedish)
+
+The forward model was trained for 2 epochs, resulting in a ppl of 3.44.
+The backward model is currently training 🤗
+
+Downloads:
+
+```bash
+wget https://schweter.eu/cloud/flair-lms/lm-cs-large-forward-v0.1.pt
+```
+
 # Training tips
 
 This sections covers data collection for training a language model. The
