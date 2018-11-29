@@ -125,12 +125,13 @@ The training paramers were:
 | `mini_batch_size` | 200 (like Swedish)
 
 The forward model was trained for 2 epochs, resulting in a ppl of 3.44.
-The backward model is currently training 🤗
+The backward model was trained for 2 epochs, resulting in a ppl of 3.48.
 
 Downloads:
 
 ```bash
 wget https://schweter.eu/cloud/flair-lms/lm-cs-large-forward-v0.1.pt
+wget https://schweter.eu/cloud/flair-lms/lm-cs-large-backward-v0.1.pt
 ```
 
 # Training tips
