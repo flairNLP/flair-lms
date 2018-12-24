@@ -134,6 +134,29 @@ wget https://schweter.eu/cloud/flair-lms/lm-cs-large-forward-v0.1.pt
 wget https://schweter.eu/cloud/flair-lms/lm-cs-large-backward-v0.1.pt
 ```
 
+# Basque
+
+The Basque language model was trained on various sources like Wikipedia,
+OpenSubtitles2018, PaCo2EnEu and WMT16_IT. The training curpus is
+relatively small and has a total size of 249M (37,926,708 token).
+
+| Parameter         | Value
+| ----------------- | -----
+| `hidden_size`     | 2048
+| `nlayers`         | 1
+| `sequence_length` | 250
+| `mini_batch_size` | 200 (like Czech)
+
+The forward model was trained for 2 epochs, resulting in a ppl of 2.56.
+The backward model was trained for 2 epochs, resulting in a ppl of 2.58.
+
+Downloads:
+
+```bash
+wget https://schweter.eu/cloud/flair-lms/lm-eu-large-forward-v0.1.pt
+wget https://schweter.eu/cloud/flair-lms/lm-eu-large-backward-v0.1.pt
+```
+
 # Training tips
 
 This sections covers data collection for training a language model. The
