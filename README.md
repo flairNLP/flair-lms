@@ -8,154 +8,44 @@ This repository will include various language models (forward and backward) that
 can be used with `flair`. It will be updated frequently. So please star or watch
 this repository 😅
 
-# Bulgarian
+# Changelog
 
-The Bulgarian language model was trained on various sources like Europarl,
-Wikipedia or SETimes corpus. The training corpus is relatively small and has
-a total size of 742M (66,701,618 token).
+**September 2019**: All Flair Embeddings that are now officially available in
+Flair >= *0.4.3* are listed.
 
-The training paramers were:
+# Parameters
 
-| Parameter         | Value
-| ----------------- | -----
-| `hidden_size`     | 2048
-| `nlayers`         | 1
-| `sequence_length` | 250
-| `mini_batch_size` | 100
+All Flair Embeddings are trained with a `hidden_size` of 2048 and `nlayers` of 1.
 
-The forward model was trained for 30 epochs, resulting in a ppl of 2.48.
-The backward model was trained for 31 epochs, resulting in a ppl of 2.51.
+# Flair Embeddings
 
-Downloads:
-
-```bash
-wget https://schweter.eu/cloud/flair-lms/lm-bg-small-forward-v0.1.pt
-wget https://schweter.eu/cloud/flair-lms/lm-bg-small-backward-v0.1.pt
-```
-
-# Slovenian
-
-The Slovenian language model was trained on various sources like Europarl,
-Wikipedia and OpenSubtitles2018. The training corpus is large and has a total
-size of 1.8G (314,973,528 token).
-
-The training paramers were:
-
-| Parameter         | Value
-| ----------------- | -----
-| `hidden_size`     | 2048
-| `nlayers`         | 1
-| `sequence_length` | 250
-| `mini_batch_size` | 100
-
-The forward model was trained for 8 epochs, resulting in a ppl of 3.28.
-The backward model was trained for 4 epochs, resulting in a ppl of 3.34.
-
-Downloads:
-
-```bash
-wget https://schweter.eu/cloud/flair-lms/lm-sl-large-forward-v0.1.pt
-wget https://schweter.eu/cloud/flair-lms/lm-sl-large-backward-v0.1.pt
-```
-
-# Dutch
-
-The Dutch language model was trained on various sources like Europarl,
-Wikipedia and OpenSubtitles2018. The training curpus is large and has a
-total size of 4.9G (897,298,291 token).
-
-The training paramers were:
-
-| Parameter         | Value
-| ----------------- | -----
-| `hidden_size`     | 2048
-| `nlayers`         | 1
-| `sequence_length` | 250
-| `mini_batch_size` | 200 (different to Bulgarian and Slovenian)
-
-The forward model was trained for 2 epochs, resulting in a ppl of 2.78.
-The backward model was trained for 2 epochs, resulting in a ppl of 2.77.
-
-Downloads:
-
-```bash
-wget https://schweter.eu/cloud/flair-lms/lm-nl-large-forward-v0.1.pt
-wget https://schweter.eu/cloud/flair-lms/lm-nl-large-backward-v0.1.pt
-```
-
-# Swedish
-
-The Swedish language model was trained on various sources like Europarl,
-Wikipedia and OpenSubtitles2018. The training curpus is large and has a
-total size of 3.3G (545,749,244 token).
-
-The training paramers were:
-
-| Parameter         | Value
-| ----------------- | -----
-| `hidden_size`     | 2048
-| `nlayers`         | 1
-| `sequence_length` | 250
-| `mini_batch_size` | 200 (like Dutch)
-
-The forward model was trained for 2 epochs, resulting in a ppl of 2.29.
-The backward model was also trained for 2 epochs, resulting in a ppl of
-2.27.
-
-Downloads:
-
-```bash
-wget https://schweter.eu/cloud/flair-lms/lm-sv-large-forward-v0.1.pt
-wget https://schweter.eu/cloud/flair-lms/lm-sv-large-backward-v0.1.pt
-```
-
-# Czech
-
-The Czech language model was trained on various sources like Europarl,
-Wikipedia and OpenSubtitles2018. The training curpus is large and has a
-total size of 4.7G (778,186,641 token).
-
-The training paramers were:
-
-| Parameter         | Value
-| ----------------- | -----
-| `hidden_size`     | 2048
-| `nlayers`         | 1
-| `sequence_length` | 250
-| `mini_batch_size` | 200 (like Swedish)
-
-The forward model was trained for 2 epochs, resulting in a ppl of 3.44.
-The backward model was trained for 2 epochs, resulting in a ppl of 3.48.
-
-Downloads:
-
-```bash
-wget https://schweter.eu/cloud/flair-lms/lm-cs-large-forward-v0.1.pt
-wget https://schweter.eu/cloud/flair-lms/lm-cs-large-backward-v0.1.pt
-```
-
-# Basque
-
-The Basque language model was trained on various sources like Wikipedia,
-OpenSubtitles2018, PaCo2EnEu and WMT16_IT. The training curpus is
-relatively small and has a total size of 249M (37,926,708 token).
-
-| Parameter         | Value
-| ----------------- | -----
-| `hidden_size`     | 2048
-| `nlayers`         | 1
-| `sequence_length` | 250
-| `mini_batch_size` | 200 (like Czech)
-
-The forward model was trained for 2 epochs, resulting in a ppl of 2.56.
-The backward model was trained for 2 epochs, resulting in a ppl of 2.58.
-
-Downloads:
-
-```bash
-wget https://schweter.eu/cloud/flair-lms/lm-eu-large-forward-v0.1.pt
-wget https://schweter.eu/cloud/flair-lms/lm-eu-large-backward-v0.1.pt
-```
+| Language model   | # Tokens | Forward ppl. | Backward ppl. | Flair Embeddings alias
+| ---------------- | -------- | ------------ | ------------- | -----------------------------
+| Arabic           | 736M     | 3.39         | 3.45          | `ar-forward` and `ar-backward`
+| Bulgarian (fast) | 66M      | 2.48         | 2.51          | `bg-forward-fast` and `bg-backward-fast`
+| Bulgarian        | 111M     | 2.46         | 2.47          | `bg-forward` and `bg-backward`
+| Czech (v0)       | 778M     | 3.44         | 3.48          | `cs-v0-forward` and `cs-v0-backward`
+| Czech            | 442M     | 2.89         | 2.90          | `cs-forward` and `cs-backward`
+| Danish           | 325M     | 2.62         | 2.68          | `da-forward` and `da-backward`
+| Basque (v0)      |  37M     | 2.56         | 2.58          | `eu-v0-forward` and `eu-v0-backward`
+| Basque (v1)      |  37M     | 2.64         | 2.31          | `eu-v1-forward` and `eu-v1-backward`
+| Basque           |  57M     | 2.90         | 2.83          | `eu-forward` and `eu-backward`
+| Persian          | 146M     | 3.68         | 3.66          | `fa-forward` and `fa-backward`
+| Finnish          | 427M     | 2.63         | 2.65          | `fi-forward` and `fi-backward`
+| Hebrew           | 502M     | 3.84         | 3.87          | `he-forward` and `he-backward`
+| Hindi            |  28M     | 2.87         | 2.86          | `hi-forward` and `hi-backward`
+| Croatian         | 625M     | 3.13         | 3.20          | `hr-forward` and `hr-backward`
+| Indonesian       | 174M     | 2.80         | 2.74          | `id-forward` and `id-backward`
+| Italian          | 1,5B     | 2.62         | 2.63          | `it-forward` and `it-backward`
+| Dutch (v0)       | 897M     | 2.78         | 2.77          | `nl-v0-forward` and `nl-v0-backward`
+| Dutch            | 1,2B     | 2.43         | 2.55          | `nl-forward` and `nl-backward`
+| Norwegian        | 156M     | 3.01         | 3.01          | `no-forward` and `no-backward`
+| Polish           | 1,4B     | 2.95         | 2.84          | `pl-opus-forward` and `pl-opus-backward`
+| Slovenian (v0)   | 314M     | 3.28         | 3.34          | `sl-v0-forward` and `sl-v0-backward`
+| Slovenian        | 419M     | 2.88         | 2.91          | `sl-forward` and `sl-backward`
+| Swedish (v0)     | 545M     | 2.29         | 2.27          | `sv-v0-forward` and `sv-v0-backward`
+| Swedish          | 671M     | 6.82 (?)     | 2.25          | `sv-forward` and `sv-backward`
+| Tamil            |  18M     | 2.23         | 4509 (!)      | `ta-forward` and `ta-backward`
 
 # Training tips
 
@@ -164,6 +54,12 @@ next section list some famous corpora and corresponding extraction
 steps to build a "clean" text corpus.
 
 ## Corpora
+
+### Leipzig Corpora Collection
+
+The [Leipzig Corpora Collection](https://wortschatz.uni-leipzig.de/en/download)
+provides sentence-segmented corpora for various domains (News, Webcrawl, Wikipedia).
+Awesome resource!
 
 ### Europarl: http://www.statmt.org/europarl
 
@@ -177,8 +73,13 @@ An extracted text can directly be used for training a language model.
 ### Wikipedia
 
 Wikipedia dumps can be found under: <https://dumps.wikimedia.org>. Just
-download the `<language>wiki-latest-pages-articles.xml.bz2` dump. Sadly
-it is a xml based dump (and no one really likes xml).
+download the `<language>wiki-latest-pages-articles.xml.bz2` dump:
+
+```bash
+wget http://download.wikimedia.org/<language>wiki/latest/<language>wiki-latest-pages-articles.xml.bz2
+```
+
+Sadly it is a xml based dump (and no one really likes xml).
 
 Thus, an extractor tool is needed to extract Wikipedia articles from
 stupid xml to plain text. I recommend the wiki extractor from
