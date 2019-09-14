@@ -10,7 +10,9 @@ this repository 😅
 
 # Changelog
 
-**September 2019**: All Flair Embeddings that are now officially available in
+**September 2019**: Multilingual Flair Embeddings trained on JW300 corpus are released.
+
+September 2019: All Flair Embeddings that are now officially available in
 Flair >= *0.4.3* are listed.
 
 # Parameters
@@ -46,6 +48,40 @@ All Flair Embeddings are trained with a `hidden_size` of 2048 and `nlayers` of 1
 | Swedish (v0)     | 545M     | 2.29         | 2.27          | `sv-v0-forward` and `sv-v0-backward`
 | Swedish          | 671M     | 6.82 (?)     | 2.25          | `sv-forward` and `sv-backward`
 | Tamil            |  18M     | 2.23         | 4509 (!)      | `ta-forward` and `ta-backward`
+
+## Multilingual Flair Embeddings
+
+I trained multilingual Flair Embeddings on the recently released
+[JW300](https://www.aclweb.org/anthology/P19-1310/) corpus. Thanks to half precision support in
+Flair, both forward and backward Embeddings were trained for 5 epochs for over 10 days.
+The training corpus has 2,025,826,977 token.
+
+| Language model   | # Tokens | Forward ppl. | Backward ppl. | Flair Embeddings alias
+| ---------------- | -------- | ------------ | ------------- | -----------------------------
+| JW300            | 2B       | 3.25         | 3.37          | `lm-jw300-forward-v0.1.pt` and `lm-jw300-backward-v0.1.pt`
+
+Notice: this JW300 model is not yet available in a tagged release of Flair, so you need to download
+it manually:
+
+```bash
+$ wget https://schweter.eu/cloud/flair-lms/lm-jw300-forward-v0.1.pt
+$ wget https://schweter.eu/cloud/flair-lms/lm-jw300-backward-v0.1.pt
+```
+
+Then it can be loaded with:
+
+```python
+from flair.embeddings import FlairEmbeddings
+
+jw_forward = FlairEmbeddings("lm-jw300-forward-v0.1.pt")
+jw_backward = FlairEmbeddings("lm-jw300-backward-v0.1.pt")
+```
+
+A detailed evaluation on various PoS tagging tasks can be found in
+[this repository](https://github.com/stefan-it/flair-pos-tagging).
+
+I would like to thank Željko Agić for providing me access to the corpus
+(before it was officially released)!
 
 # Training tips
 
