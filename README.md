@@ -1,7 +1,7 @@
 # `flair-lms`
 
-This repository is part of my NLP research with
-[`flair`](https://github.com/zalandoresearch/flair), a state-of-the-art NLP
+This repository is part of the NLP research with
+[`flair`](https://github.com/flairNLP/flair), a state-of-the-art NLP
 framework from [Zalando Research](https://research.zalando.com/).
 
 This repository will include various language models (forward and backward) that
@@ -10,7 +10,9 @@ this repository 😅
 
 # Changelog
 
-**September 2019**: Multilingual Flair Embeddings trained on JW300 corpus are released.
+**January 2020**: Move repository to the new [FlairNLP](https://github.com/flairNLP) group on GitHub.
+
+September 2019: New Multilingual Flair Embeddings trained on JW300 corpus are released.
 
 September 2019: All Flair Embeddings that are now officially available in
 Flair >= *0.4.3* are listed.
@@ -51,185 +53,27 @@ All Flair Embeddings are trained with a `hidden_size` of 2048 and `nlayers` of 1
 
 ## Multilingual Flair Embeddings
 
-I trained multilingual Flair Embeddings on the recently released
+Multilingual Flair Embeddings were trained on the recently released
 [JW300](https://www.aclweb.org/anthology/P19-1310/) corpus. Thanks to half precision support in
 Flair, both forward and backward Embeddings were trained for 5 epochs for over 10 days.
 The training corpus has 2,025,826,977 token.
 
 | Language model   | # Tokens | Forward ppl. | Backward ppl. | Flair Embeddings alias
 | ---------------- | -------- | ------------ | ------------- | -----------------------------
-| JW300            | 2B       | 3.25         | 3.37          | `lm-jw300-forward-v0.1.pt` and `lm-jw300-backward-v0.1.pt`
+| JW300            | 2B       | 3.25         | 3.37          | `multi-forward` and `multi-backward`
 
-Notice: this JW300 model is not yet available in a tagged release of Flair, so you need to download
-it manually:
 
-```bash
-$ wget https://schweter.eu/cloud/flair-lms/lm-jw300-forward-v0.1.pt
-$ wget https://schweter.eu/cloud/flair-lms/lm-jw300-backward-v0.1.pt
-```
-
-Then it can be loaded with:
+It can be loaded with:
 
 ```python
 from flair.embeddings import FlairEmbeddings
 
-jw_forward = FlairEmbeddings("lm-jw300-forward-v0.1.pt")
-jw_backward = FlairEmbeddings("lm-jw300-backward-v0.1.pt")
+jw_forward = FlairEmbeddings("multi-forward")
+jw_backward = FlairEmbeddings("multi-backward")
 ```
 
 A detailed evaluation on various PoS tagging tasks can be found in
 [this repository](https://github.com/stefan-it/flair-pos-tagging).
 
-I would like to thank Željko Agić for providing me access to the corpus
+We would like to thank Željko Agić for providing us access to the corpus
 (before it was officially released)!
-
-# Training tips
-
-This sections covers data collection for training a language model. The
-next section list some famous corpora and corresponding extraction
-steps to build a "clean" text corpus.
-
-## Corpora
-
-### Leipzig Corpora Collection
-
-The [Leipzig Corpora Collection](https://wortschatz.uni-leipzig.de/en/download)
-provides sentence-segmented corpora for various domains (News, Webcrawl, Wikipedia).
-Awesome resource!
-
-### Europarl: http://www.statmt.org/europarl
-
-The Europarl corpus consists of translated text from the European
-parliament in several languages. It is very popular in the machine
-translation community.
-
-Texts for several languages can be found under <http://www.statmt.org/europarl>.
-An extracted text can directly be used for training a language model.
-
-### Wikipedia
-
-Wikipedia dumps can be found under: <https://dumps.wikimedia.org>. Just
-download the `<language>wiki-latest-pages-articles.xml.bz2` dump:
-
-```bash
-wget http://download.wikimedia.org/<language>wiki/latest/<language>wiki-latest-pages-articles.xml.bz2
-```
-
-Sadly it is a xml based dump (and no one really likes xml).
-
-Thus, an extractor tool is needed to extract Wikipedia articles from
-stupid xml to plain text. I recommend the wiki extractor from
-<https://github.com/attardi/wikiextractor>. Just clone that repository
-or download the tool directly via:
-
-```bash
-wget https://raw.githubusercontent.com/attardi/wikiextractor/master/WikiExtractor.py
-```
-
-Then run the `WikiExtractor` using:
-
-```bash
-python3 WikiExtractor.py -c -b 25M -o extracted <language>wiki-latest-pages-articles.xml.bz2
-```
-
-This will create `bz2` archives with plain-text wikipedia articles.
-
-Do extract these smaller chunks just use:
-
-```bash
-find extracted -name '*bz2' \! -exec bzip2 -k -c -d {} \; > <language>wiki.xml
-```
-
-All wikipedia articles are then stored in `<language>wiki.xml`. Only
-four preprocessing steps are needed after extraction:
-
-* Strip some stupid xml tags with: `sed -i 's/<[^>]*>//g' <language>wiki.xml`
-* Remove empty lines with: `sed -i '/^\s*$/d' <language>wiki.xml`
-* Remove the temporarily created extraction folder: `rm -rf extracted`
-* Rename the corpus from xml to txt: `mv <language>wiki.xml <language>wiki.txt`
-
-Your final cleaned plain-text corpus is then located under `<language>wiki.txt`.
-
-### OpenSubtitles2018
-
-Many subtitles from various movies in several languages could be found
-on the [OPUS](http://opus.nlpl.eu/) webpage.
-
-Just find out the language code for your desired language and download
-an open subtitles dump:
-
-```bash
-wget "http://opus.nlpl.eu/download.php?f=OpenSubtitles2018%2F<language>.raw.tar.gz"
-```
-
-Unfortunately, all subtitles are stored in a stupid xml format. But first,
-extract the archives with:
-
-```bash
-find . -name '*.gz' -exec gunzip '{}' \;
-```
-
-Then concatenate all xml files into one large xml file:
-
-```bash
-find OpenSubtitles2018/raw/<language>/ -name *.xml -exec cat {} + > opensubtitles-combined.xml
-```
-
-Instead of using some stupid xml parsing, just throw away all stupid
-xml tags:
-
-```bash
-cat opensubtitles-combined.xml | grep -v "<" > opensubtitles-combined.txt
-```
-
-In the final step, just delete the old xml file:
-
-```bash
-rm opensubtitles-combined.xml
-```
-
-### SETimes
-
-The SETimes corpus contains newspaper articles that have been translated
-into several Balkan languages. The corpus can be found under
-<http://nlp.ffzg.hr/resources/corpora/setimes/>. Just extract them
-and they can be used directly to train a language model.
-
-Just make sure that you have downloaded the plain text corpus and
-**not** the Moses tokenized texts.
-
-## Tokenization
-
-Notice: **do not** use tokenized or preprocessed corpora, and **do not**
-tokenize or preprocess the data. Plain text is all you need :)
-
-## Preparations for training
-
-After you collected all dataset, concatenate it like e.g. `cat *.txt >> <language>.dataset.txt`.
-
-It is also very important to **shuffle** your data! This can be done
-with the `shuf` command:
-
-```bash
-cat <language>.dataset.txt | shuf > <language>.dataset.shuffled.txt
-```
-
-## Dataset split
-
-One strategy for splitting the shuffled dataset into training,
-development and test sets could be the following:
-
-* Count the number of lines in your shuffled dataset with: `wc -l <language>.dataset.shuffled.txt`
-* Use 1/500 as development and 1/500 as test set
-* Use `split` command with `-l` option
-* The folder structure must be:
-
-  ```
-  .
-  ├── test.txt
-  ├── train
-  │   ├── xaa
-  │   ├── ...
-  │   └── xzz
-  └── valid.txt
-  ```
